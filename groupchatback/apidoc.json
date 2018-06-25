@@ -1,0 +1,7 @@
+{
+    "name": " Express MVC based REST API for a Group Chat Website",
+    "version": "0.0.1",
+    "description": "Documentation for the API",
+    "title": "Group Chat Application APIs",
+    "url" : "http://localhost:3000"
+  }

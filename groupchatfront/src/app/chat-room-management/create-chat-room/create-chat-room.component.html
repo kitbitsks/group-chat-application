@@ -1,0 +1,47 @@
+<div class="row " >
+    <div class="col-md-12" style="text-align: center">
+    <h1 class="font-weight-light">Welcome to the Group Chat</h1></div>
+  </div>
+
+<div class="row p-0 m-0">
+
+  <div class="col-sm"></div>
+
+  <div class="col-sm p-5">
+
+    <h2 class="form-signin-heading">Create your Chat Room</h2>
+
+    <br>
+
+    <span>Name: </span>
+
+    <label for="room-name" class="sr-only">Name</label>
+
+    <input type="text" id="room-name" class="form-control" [(ngModel)]="nameOfRoom" placeholder="name of chat-room" required autofocus>
+
+    <br>
+
+    <span>aliases</span>
+
+    <label for="aliases" class="sr-only">aliases</label>
+
+    <input type="text" id="aliases" class="form-control" placeholder="represented as" required>
+
+    <br>
+
+    <span>Admin</span>
+
+    <label for="admin" class="sr-only">Admin</label>
+
+    <input type="text" id="admin" class="form-control" placeholder="admin-name" required>
+
+    <br>
+
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" type="button" (click)="proceedToRoom()">Proceed</button>
+
+  </div>
+
+  <div class="col-sm"></div>
+
+</div>

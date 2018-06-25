@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Events</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+    <!-- <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/> -->
+    <style>
+    /* Custom Stylesheet */
+
+    .icon-block {
+        padding: 0 15px;
+    }
+
+    .icon-block .material-icons {
+        font-size: inherit;
+    }
+    </style>
+</head>
+
+<body>
+    <nav class="black lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo" style="font-size:1.6em !important; color: white;"><strong>Group Chat App</strong></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/apiDoc/index.html">API Docs</a></li>
+            </ul>
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="/apiDoc/index.html">API Docs</a></li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+    <div class="section no-pad-bot" style="margin-bottom: 0px" id="index-banner">
+        <div class="container" style="width: 80%">
+          <p style="font-size: 2em; font-weight: 540; text-align: center">Events documentation</p>
+            <div class="row">
+
+                <div class="col hide-on-small-only m3 l2">
+                    <ul class="section table-of-contents" style="position: fixed">
+                        <li><a href="#listen" style="color: #03a9f4; font-size: 1.2em; font-weight: bold">Listen</a></li>
+                        <li><a href="#verifyUser">verifyUser</a></li>
+                        <li><a href="#create-room">create-room</a></li>
+                        <li><a href="#usersList">online-user-list</a></li>
+                        <li><a href="#onRefresh">onRefresh</a></li>
+                        <li><a href="#onRefreshOnline">onRefreshOnline</a></li>
+                        <li><a href="#switch-room">switch-room</a></li>
+                        
+                        <!-- <li><a href="#chatHistory">retrieve-chats-history</a></li> -->
+                        <li><a href="#userId">userId</a></li>
+                        <li><a href="#error-occurred">error-occurred</a></li>
+                        <li><a href="#disconnect">disconnect</a></li>
+                        <li><a href="#emit" style="color: #03a9f4; font-size: 1.2em; font-weight: bold">Emit</a></li>
+                        <li><a href="#set-user">set-user</a></li>
+                        <li><a href="#chat-msg">chat-msg</a></li>
+                        <li><a href="#roomsare">roomsare</a></li>
+                        <li><a href="#joinedRoom">joinedRoom</a></li>
+                        <li><a href="#leftRoom">leftRoom</a></li>
+                        
+                    </ul>
+                </div>
+
+                <div class="col s12 m9 l10">
+
+                    <div id="listen" class="section scrollspy"></div>
+                    <h4>Events to listen</h4>
+
+                    <div id="create-room" class="section scrollspy">
+                        <h5>create-room event</h5>
+                        This event <span style="font-weight: 600">("create-room")</span> has to be listened on the user's end to create a room.<br/>
+                        for incoming online users<br/>
+                    </div>
+
+                    <div id="verifyUser" class="section scrollspy">
+                        <h5>verifyUser event</h5>
+                        This event <span style="font-weight: 600">("verifyUser")</span> has to be listened on the user's end to verify user authentication.<br/>
+                        user will only be set as online user after verification of authentication token.<br/>
+                    </div>
+                    <div id="usersList" class="section scrollspy">
+                        <h5>online-user-list event</h5>
+                        This event <span style="font-weight: 600">("online-user-list")</span> has to be listened on the user's end to identify all available users that are currently online.<br/>
+                        All available users can be shown to the user based on which he can start chatting with a user.<br/>
+                        The output will be an object, object has key as userId and value as full name.
+                    </div>
+                    <!-- <div id="chatHistory" class="section scrollspy">
+                        <h5>retrieve-chats-history event</h5>
+                        This event <span style="font-weight: 600">("retrieve-chats-history")</span> has to be listened to get previous chats between the logged in user and the other user.<br/>
+                        You have to hit this api "https://chatapi.edwisor.com/api/v1/chat/get/for/user" (refer to api doc),<br>
+                        to get previous chats.
+
+                    </div> -->
+                    <div id="userId" class="section scrollspy">
+                        <h5>userId event</h5>
+                        <span><b>This event's name is actually dynamic and refers to the userId of the logged in user.</b></span><br>
+                        This event <span style="font-weight: 600">("userId")</span> has to be listened to identify an individual chat message that has been received.<br/>
+                        Example output it as follows:<br/>
+                        <pre>
+                            {
+                                chatId: 'unique chat id',
+                                message: 'you message',
+                                createdOn: date, 
+                                receiverId: 'userId of receiver',
+                                receiverName: full name of receiver,
+                                senderId: 'userId of sender',
+                                senderName: 'full name of sender'
+                            }
+                        </pre>
+                    </div>
+                    <div id="error-occurred" class="section scrollspy">
+                        <h5>error-occurred event</h5>
+                        This event <span style="font-weight: 600">("error-occurred")</span> has to be listened to identify an error which will occur when the data is not sent properly in the events to be emitted.<br/>
+                        Example output it as follows:<br/>
+                        <pre>
+                            {
+                                status: 123,
+                                error: 'error message'
+                            }
+                        </pre>
+                    </div>
+                    <div id="disconnect" class="section scrollspy">
+                        <h5>disconnect event (optional)</h5>
+                        This event <span style="font-weight: 600">("disconnect")</span> has to be listened, when the user is disconnected to show proper message.<br/>
+                    </div>
+                    <div id="onRefresh" class="section scrollspy">
+                        <h5>onRefresh event</h5>
+                        This event <span style="font-weight: 600">("onRefresh")</span> has to be listened on the servers's end to emit the online rooms explicitly.<br/>
+
+                    </div>
+                                        <div id="onRefreshOnline" class="section scrollspy">
+                        <h5>onRefreshOnline event</h5>
+                        This event <span style="font-weight: 600">("onRefreshOnline")</span> has to be listened on the server's end to explicitly emit the list of online rooms<br/>
+                    </div>
+                                        <div id="switch-room" class="section scrollspy">
+                        <h5>switch-room event</h5>
+                        This event <span style="font-weight: 600">("switch-room")</span> has to be listened on the server's end to allow emit the user to leave his/her current room and join other room.<br/>
+                    </div>
+
+
+
+
+                  
+                    <div id="emit" class="section scrollspy"></div>
+                    <h4>Events to emit</h4>
+
+                    <div id="set-user" class="section scrollspy">
+                        <h5>set-user event</h5>
+                        This event <span style="font-weight: 600">("set-user")</span> has to be emitted when a user comes online.<br/>
+                        User can only be set as online only after verification of authentication token. Which you have pass here.
+                        The following data has to be emitted<br/>
+                        authentication token
+                    </div>
+
+                    <div id="roomsare" class="section scrollspy">
+                        <h5>roomsare event</h5>
+                        This event <span style="font-weight: 600">("roomsare")</span> has to be emitted when a user joins a room.<br/>
+                        User data in form of object can only be set as online only after verification of authentication token. Which you have pass here.
+                        The following data has to be emitted<br/>
+                        authentication token
+                    </div>
+                    <div id="chat-msg" class="section scrollspy">
+                        <h5>chat-msg event</h5>
+                        This event <span style="font-weight: 600">("chat-msg")</span> has to be emitted to identify an individual chat message that has been send.<br/>
+                        The following data has to be emitted<br/>
+                        <pre>
+                            {
+                                senderName: 'John Doe',
+                                senderId: 'userId of sender',
+                                receiverName: 'Smith',
+                                receiverId: 'userId of receiver',
+                                message: 'your chat message',
+                                createdOn: date
+                            }
+                        </pre>
+                    </div>
+
+                                        <div id="joinedRoom" class="section scrollspy">
+                        <h5>joinedRoom event</h5>
+                        This event <span style="font-weight: 600">("joined-room")</span> has to be listened on the user's end to allow emit the user to all the user in the room that he/she has joined that room<br/>
+                    </div>
+
+                                        <div id="leftRoom" class="section scrollspy">
+                        <h5>leftRoom event</h5>
+                        This event <span style="font-weight: 600">("left-room")</span> has to be listened on the user's end to allow emit the user to all the user in the room that he/she has left that room<br/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<br/><br/><br/><br/>
+        
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.scrollspy').scrollSpy();
+    });
+    </script>
+    <script>
+    (function($) {
+        $(function() {
+
+            $('.button-collapse').sideNav();
+
+        }); // end of document ready
+    })(jQuery); // end of jQuery name space
+    </script>
+</body>
+
+</html>
